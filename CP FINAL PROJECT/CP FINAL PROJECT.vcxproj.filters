@@ -18,5 +18,11 @@
     <ClCompile Include="Characters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Quests creating.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="final boss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
