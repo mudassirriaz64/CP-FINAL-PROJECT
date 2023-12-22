@@ -176,108 +176,141 @@ void quest_1_function(char& quest_choice, struct quest_1_boss)
 		"and oher creatures but this time the hero was also frightened as the dragon was "
 		"enormous and had a menacing aura due to which the hero was not feeling well.Still "
 		"He fights for everyone and is determined to defeat the monster.Fight Starts";
-	cout << "\nSelect The difficulty on which you want to play it.\n(1).Easy\n(2).Medium\n(3).Hard\nchoose e.g(1,2):";
-	cin >> difficulty;
 	display_character(character);
-	if (difficulty == 1)
+	cout << "\nSelect The difficulty on which you want to play it.\n(1).Easy\n(2).Medium\n(3).Hard\nchoose e.g(1,2):";
+	do
 	{
-		cout << "\nYour difficulty level is Easy.";
-		cout << "\nThe quest will Start soon. ";
-		cout << "\n\n Attackrand()";
+		cin >> difficulty;
+		if (difficulty == 1)
+		{
+			cout << "\nYour difficulty level is Easy.";
+			cout << "\nThe quest will Start soon. ";
+			cout << "\n\n Attackrand()";
+		}
+		else if (difficulty == 2)
+		{
+			cout << "\nYour difficulty level is Medium.";
+		}
+		else if (difficulty == 3)
+		{
+			cout << "\nYour difficulty level is Hard.";
+		}
+		else
+		{
+			cout << "Invalid Selection, please select again";
+		}
 
-
-	}
-	else if (difficulty == 2) {
-		cout << "\nYour difficulty level is Medium.";
-	}
-	else if (difficulty == 3) {
-		cout << "\nYour difficulty level is Hard.";
-	}
+	} while (difficulty != 1 && difficulty != 2 && difficulty != 3);
 }
 
 // FUNCTION OF QUEST 2
 void quest_2_function(char& quest_choice, struct quest_2_boss)
 {
 	int difficulty;
-	string quest_1_message = " This Quest was the battle in which the forgotten race namely"
+	string quest_2_message = " This Quest was the battle in which the forgotten race namely"
 		"the race of dragons which were thought to be extinct millions of years "
 		"ago but our hero was not shocked to see them as he had battles with monsters "
 		"and oher creatures but this time the hero was also frightened as the dragon was "
 		"enormous and had a menacing aura due to which the hero was not feeling well.Still "
 		"He fights for everyone and is determined to defeat the monster.Fight Starts";
-	cout << "\nSelect The difficulty on which you want to play it.\n(1).Easy\n(2).Medium\n(3).Hard\nchoose e.g(1,2):";
-	cin >> difficulty;
 	display_character(character);
-	if (difficulty == 1)
+	cout << "\nSelect The difficulty on which you want to play it.\n(1).Easy\n(2).Medium\n(3).Hard\nchoose e.g(1,2):";
+	do
 	{
-		cout << "\nYour difficulty level is Easy.";
-		cout << "\nThe quest will Start soon. ";
-		cout << "\n\n Attackrand()";
+		cin >> difficulty;
+		if (difficulty == 1)
+		{
+			cout << "\nYour difficulty level is Easy.";
+			cout << "\nThe quest will Start soon. ";
+			cout << "\n\n Attackrand()";
+		}
+		else if (difficulty == 2)
+		{
+			cout << "\nYour difficulty level is Medium.";
+		}
+		else if (difficulty == 3)
+		{
+			cout << "\nYour difficulty level is Hard.";
+		}
+		else
+		{
+			cout << "Invalid Selection, please select again";
+		}
 
-
-	}
-	else if (difficulty == 2) {
-		cout << "\nYour difficulty level is Medium.";
-	}
-	else if (difficulty == 3) {
-		cout << "\nYour difficulty level is Hard.";
-	}
+	} while (difficulty != 1 && difficulty != 2 && difficulty != 3);
 }
 
 // FUNCTION OF QUEST 3
 void quest_3_function(char& quest_choice, struct quest_3_boss)
 {
 	int difficulty;
-	string quest_1_message = " This Quest was the battle in which the forgotten race namely"
+	string quest_3_message = " This Quest was the battle in which the forgotten race namely"
 		"the race of dragons which were thought to be extinct millions of years "
 		"ago but our hero was not shocked to see them as he had battles with monsters "
 		"and oher creatures but this time the hero was also frightened as the dragon was "
 		"enormous and had a menacing aura due to which the hero was not feeling well.Still "
 		"He fights for everyone and is determined to defeat the monster.Fight Starts";
-	cout << "\nSelect The difficulty on which you want to play it.\n(1).Easy\n(2).Medium\n(3).Hard\nchoose e.g(1,2):";
-	cin >> difficulty;
 	display_character(character);
-	if (difficulty == 1)
+	cout << "\nSelect The difficulty on which you want to play it.\n(1).Easy\n(2).Medium\n(3).Hard\nchoose e.g(1,2):";
+	do
 	{
-		cout << "\nYour difficulty level is Easy.";
-		cout << "\nThe quest will Start soon. ";
-		cout << "\n\n Attackrand()";
+		cin >> difficulty;
+		if (difficulty == 1)
+		{
+			cout << "\nYour difficulty level is Easy.";
+			cout << "\nThe quest will Start soon. ";
+			cout << "\n\n Attackrand()";
+		}
+		else if (difficulty == 2)
+		{
+			cout << "\nYour difficulty level is Medium.";
+		}
+		else if (difficulty == 3)
+		{
+			cout << "\nYour difficulty level is Hard.";
+		}
+		else
+		{
+			cout << "Invalid Selection, please select again";
+		}
 
-
-	}
-	else if (difficulty == 2) {
-		cout << "\nYour difficulty level is Medium.";
-	}
-	else if (difficulty == 3) {
-		cout << "\nYour difficulty level is Hard.";
-	}
+	} while (difficulty!=1 && difficulty!=2 && difficulty!=3);
+	
 }
 
 // FUNCTION OF QUEST 4
 void quest_4_function(char& quest_choice, struct quest_4_boss)
 {
 	int difficulty;
-	string quest_1_message = " This Quest was the battle in which the forgotten race namely"
+	string quest_4_message = " This Quest was the battle in which the forgotten race namely"
 		"the race of dragons which were thought to be extinct millions of years "
 		"ago but our hero was not shocked to see them as he had battles with monsters "
 		"and oher creatures but this time the hero was also frightened as the dragon was "
 		"enormous and had a menacing aura due to which the hero was not feeling well.Still "
 		"He fights for everyone and is determined to defeat the monster.Fight Starts";
-	cout << "\nSelect The difficulty on which you want to play it.\n(1).Easy\n(2).Medium\n(3).Hard\nchoose e.g(1,2):";
-	cin >> difficulty;
 	display_character(character);
-	if (difficulty == 1)
+	cout << "\nSelect The difficulty on which you want to play it.\n(1).Easy\n(2).Medium\n(3).Hard\nchoose e.g(1,2):";
+	do
 	{
-		cout << "\nYour difficulty level is Easy.";
-		cout << "\nThe quest will Start soon. ";
-		cout << "\n\n Attackrand()";
+		cin >> difficulty;
+		if (difficulty == 1)
+		{
+			cout << "\nYour difficulty level is Easy.";
+			cout << "\nThe quest will Start soon. ";
+			cout << "\n\n Attackrand()";
+		}
+		else if (difficulty == 2)
+		{
+			cout << "\nYour difficulty level is Medium.";
+		}
+		else if (difficulty == 3)
+		{
+			cout << "\nYour difficulty level is Hard.";
+		}
+		else
+		{
+			cout << "Invalid Selection, please select again";
+		}
 
-
-	}
-	else if (difficulty == 2) {
-		cout << "\nYour difficulty level is Medium.";
-	}
-	else if (difficulty == 3) {
-		cout << "\nYour difficulty level is Hard.";
-	}
+	} while (difficulty != 1 && difficulty != 2 && difficulty != 3);
 }
