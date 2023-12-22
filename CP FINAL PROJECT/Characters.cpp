@@ -197,7 +197,7 @@ void quest_1_function(char& quest_choice, struct quest_1_boss)
 		}
 		else
 		{
-			cout << "Invalid Selection, please select again";
+			cout << "Invalid Selection, please select again : ";
 		}
 
 	} while (difficulty != 1 && difficulty != 2 && difficulty != 3);
@@ -234,7 +234,7 @@ void quest_2_function(char& quest_choice, struct quest_2_boss)
 		}
 		else
 		{
-			cout << "Invalid Selection, please select again";
+			cout << "Invalid Selection, please select again : ";
 		}
 
 	} while (difficulty != 1 && difficulty != 2 && difficulty != 3);
@@ -271,7 +271,7 @@ void quest_3_function(char& quest_choice, struct quest_3_boss)
 		}
 		else
 		{
-			cout << "Invalid Selection, please select again";
+			cout << "Invalid Selection, please select again : ";
 		}
 
 	} while (difficulty!=1 && difficulty!=2 && difficulty!=3);
@@ -309,7 +309,7 @@ void quest_4_function(char& quest_choice, struct quest_4_boss)
 		}
 		else
 		{
-			cout << "Invalid Selection, please select again";
+			cout << "Invalid Selection, please select again : ";
 		}
 
 	} while (difficulty != 1 && difficulty != 2 && difficulty != 3);
