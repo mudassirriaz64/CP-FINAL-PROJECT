@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="attak.cpp" />
     <ClCompile Include="Characters.cpp" />
     <ClCompile Include="final boss.cpp" />
   </ItemGroup>
