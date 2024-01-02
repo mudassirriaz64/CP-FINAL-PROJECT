@@ -2,6 +2,8 @@
 #include<string>
 #include<math.h>
 #include<cstdlib>
+#include <thread>
+#include <chrono>
 using namespace std;
 
 struct character_information // STORES INFORMATION ABOUT THE HERO OR CHARACTER
@@ -49,6 +51,8 @@ struct final_boss
 	int damage = 0;
 	int level = 20;
 }the_witch;
+
+
 // FUNCTIONS PROTOYPES OF ALL THE FUNCTIONS USED IN THE PROGRAM
 void main_menu();
 void game_loop();
@@ -60,9 +64,11 @@ void quest_2_function(struct quest_2_boss);
 void quest_3_function(struct quest_3_boss);
 void quest_4_function(struct quest_4_boss);
 void final_boss(struct final_boss);
+void delayprint(const string& text, int milliseconds);
 // INT MAIN
 int main()
 {
+	cout<<"\t\tWelcome To Eldoria\n";
 	game_loop();
 	return 0;
 }
@@ -86,22 +92,22 @@ void game_loop()
 void main_menu()
 {
 	char choice;
-	cout << "\t\t\tMain Menu\n1.Start\n2.Exit\n";
-	cout << "Enter your choice(1,2):";
-	do
-	{
+	cout << "Main Menu\n";
+	cout<<"1.Start\n";
+	cout<<"2.Exit\n";
+	cout << "Enter your choice (1,2):";
+	do {
 		cin >> choice;
-		switch (choice)
-		{
-		case '1':
-		{
+		switch (choice) {
+		case '1': {
 			system("cls");
 			take_input_character(character);
 			system("cls");
-			quest_selection_function(monster , king , gunsmith, dragon, the_witch);
+			quest_selection_function(monster, king, gunsmith, dragon, the_witch);
 			break;
 		}
-		case '2':break;
+		case '2':
+			break;
 		}
 		if (choice != '1' && choice != '2')
 			cout << "Invalid Selection, try again : ";
@@ -110,7 +116,7 @@ void main_menu()
 // THIS FUNCTION SELECTS THE HERO AND OTHER INFORMATION RELATED TO HERO
 static void take_input_character(struct character_information)
 {
-	cout << "You have to select hero from one of the following hero,Each of the character has its own weapone and style)" << endl;
+	cout << "You have to select hero from one of the following hero,(Each of the character has its own weapon and style)" << endl;
 	cout << "1. Valkriye " << endl;
 	cout << "Fights with an axe around her,Tough melee Fighter and deals area damage around her " << endl;// Enter description of valkriye
 	cout << "2. Magic Archer" << endl;
@@ -168,16 +174,17 @@ void display_character(struct character_information) // DISPLAY HERO OR CHARACTE
 void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct quest_3_boss, struct quest_4_boss, struct final_boss)
 {
 	char quest_choice;
-	
-	cout << "\t \"You can Embark on different Quests." << endl
-		<< "\t\nEach quest have different difficulty level." << endl;
-	cout << "A.The forgotten Race." << endl;
-	cout << "B.Army of the king." << endl; 
-	cout << "C.The jury." << endl;
-	cout << "D.The king of dragons." << endl;
-	cout << "E.The Final Battle with the Witch" << endl;
-	cout << "NOTE : If you select a quest you have already completed, your health points and damage will be calibrated" << endl;
-	cout << "Enter the quest you want to play(you can only select the unlocked quests) (e.g. A,B):";
+	delayprint("\tYou can Embark on different Quests.\n", 75);
+	delayprint("\t\nEach quest have different difficulty level.\n", 75);
+	cout << endl;
+	delayprint("A.THE FORGOTTEN RACE.\n", 75);
+	delayprint("B.ARMY OF THE KING.\n", 75);
+	delayprint("C.THE JURY.\n", 75);
+	delayprint("D.THE DRAGON KING.\n", 75);
+	delayprint("E.THE FINAL WITCH.\n", 75);
+	cout<< "NOTE : If you select a quest you have already completed, your health points and damage will be calibrated" << endl
+		<< "Enter the quest you want to play(You can only select the unlocked quests) "
+		<<"otherwise, it would not play the quest (e.g.A, B): ";
 	do {
 		cin >> quest_choice;
 		if (islower(quest_choice))
@@ -721,7 +728,7 @@ void quest_2_function(struct quest_2_boss)
 	//This Boss Will be MEDIUM as it is the first Quest
 	do
 	{
-		cout << "The Battle has started" << endl;
+		delayprint("The Battle has started",150);
 		king.health = 2450;
 		character.hero_health = 2000;
 		while (king.health >= 1 && character.hero_health >= 1)
@@ -993,4 +1000,13 @@ void final_boss(struct final_boss)
 				exit;
 			}
 	} while (try_again_choice == '1');
+}
+//FUNCTION TO PRINT THE TEXT WITH A LITTLE DELAY
+void delayprint(const string& text, int milliseconds)
+{
+	for (char ch : text) 
+	{
+		cout << ch << flush; // Flush is a manipulator that ensures that the text is displayed immediatly without any buffer.
+		this_thread::sleep_for(chrono::milliseconds(milliseconds)); // Pre-build function to introduce delay
+	}
 }
