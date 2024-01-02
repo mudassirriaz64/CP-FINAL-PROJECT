@@ -87,6 +87,7 @@ void main_menu()
 		{
 			take_input_character(character);
 			quest_selection_function(monster , king , gunsmith, dragon);
+			break;
 		}
 		case '2':break;
 		}
@@ -448,7 +449,7 @@ void quest_1_function(char& quest_choice, struct quest_1_boss)
 		{
 			cin >> try_again_choice;
 			if (try_again_choice != 1 && try_again_choice != 2 && try_again_choice != 3 && try_again_choice != 4)
-				cout << "Invalid Selection, select again : ";
+				cout << "Invalid Quest Selection, select again : ";
 		} while (try_again_choice != 1 && try_again_choice != 2 && try_again_choice != 3 && try_again_choice != 4);
 		if (try_again_choice == 2)
 			quest_selection_function(monster, king, gunsmith, dragon);
@@ -518,7 +519,7 @@ void quest_2_function(char& quest_choice, struct quest_2_boss)
 		{
 			cin >> try_again_choice;
 			if (try_again_choice != 1 && try_again_choice != 2 && try_again_choice != 3 && try_again_choice != 4)
-				cout << "Invalid Selection, select again : ";
+				cout << "Invalid Quest Selection, select again : ";
 		} while (try_again_choice != 1 && try_again_choice != 2 && try_again_choice != 3 && try_again_choice != 4);
 		if (try_again_choice == 2)
 			quest_selection_function(monster, king, gunsmith, dragon);
@@ -587,7 +588,7 @@ void quest_3_function(char& quest_choice, struct quest_3_boss)
 		{
 			cin >> try_again_choice;
 			if (try_again_choice != 1 && try_again_choice != 2 && try_again_choice != 3 && try_again_choice != 4)
-				cout << "Invalid Selection, select again : ";
+				cout << "Invalid Quest Selection, select again : ";
 		} while (try_again_choice != 1 && try_again_choice != 2 && try_again_choice != 3 && try_again_choice != 4);
 		if (try_again_choice == 2)
 			quest_selection_function(monster, king, gunsmith, dragon);
@@ -656,7 +657,7 @@ void quest_4_function(char& quest_choice, struct quest_4_boss)
 		{
 			cin >> try_again_choice;
 			if (try_again_choice != 1 && try_again_choice != 2 && try_again_choice != 3 && try_again_choice != 4)
-				cout << "Invalid Selection, select again : ";
+				cout << "Invalid Quest Selection, select again : ";
 		} while (try_again_choice != 1 && try_again_choice != 2 && try_again_choice != 3 && try_again_choice != 4);
 		if (try_again_choice == 2)
 			quest_selection_function(monster, king, gunsmith, dragon);
