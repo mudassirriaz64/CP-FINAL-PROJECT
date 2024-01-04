@@ -15,6 +15,7 @@ struct character_information // STORES INFORMATION ABOUT THE HERO OR CHARACTER
 	int hero_health = 0;
 	string hero_weapon;
 	int hero_damage = 0;
+	int level = 0;
 }character;
 
 struct quest_1_boss // STORES INFORMATION ABOUT QUEST 1 BOSS WHICH IS MONSTER
@@ -68,13 +69,14 @@ void delayprint(const string& text, int milliseconds);
 // INT MAIN
 int main()
 {
-	cout<<"\t\tWelcome To Eldoria\n";
+	// INT MAIN
 	game_loop();
 	return 0;
 }
 void game_loop()
 {
 	char playAgain;
+	cout << "\t\tWelcome To Eldoria\n";
 	do 
 	{
 		main_menu();
@@ -168,6 +170,7 @@ void display_character(struct character_information) // DISPLAY HERO OR CHARACTE
 	cout << "Health : " << character.hero_health << endl;
 	cout << "Experience Level : " << character.hero_experience_level << endl;
 	cout << "Weapon : " << character.hero_weapon << endl;
+	cout << "Level : " << character.level << endl;
 }
 
 // THIS FUNCTION STARTS THE QUEST BASED ON USER CHOICE
@@ -714,8 +717,6 @@ void quest_1_function(struct quest_1_boss)
 			character.hero_health = character.hero_health - monster.damage;
 			delayprint("\nHero Health = ", 70);
 			cout << character.hero_health;
-			if (monster.health < 50)
-				break;
 			cout << endl;
 			cout << endl;
 			continue;
@@ -724,16 +725,18 @@ void quest_1_function(struct quest_1_boss)
 		if (monster.health < 50)
 		{
 
-			delayprint("\n\tYou killed The Boss with the final attack\n\tThe boss is defeated",75);
+			delayprint("\n\tYou killed The Monster with the final attack\n\tThe boss is defeated",75);
 			character.hero_health = 2000;
 			delayprint("\n\tYour Hero has been promoted to level 1. healthpoints and damage is increased, experience point reseted", 75);
+			character.level = 1;
 			cout << endl;
 		}
 		else if (character.hero_health < 50)
 		{
 			monster.health = 2000;
 			character.hero_health = 1584;
-			delayprint("\n\tYou Died....The monster killed you.\n",75);
+			character.level = 0;
+			delayprint("\n\tYou Died....The Monster killed you.\n",75);
 		}
 		cout << "\nPress 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
 		do
@@ -763,58 +766,89 @@ void quest_1_function(struct quest_1_boss)
 // FUNCTION OF QUEST 2
 void quest_2_function(struct quest_2_boss)
 {
-	char try_again_choice;
+	char try_again_choice = '0';
 	char hero_attack_button;
+	cout << endl;
 	display_character(character);
-	srand((unsigned)time(NULL));
-	//This Boss Will be MEDIUM as it is the first Quest
+	cout << endl;
+	cout << "King Health = 2450\n";
+	cout << "King Level = 10 ";
+	cout << endl;
+	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
 	do
 	{
-		delayprint("The Battle has started",150);
+		if (try_again_choice == '1')
+		{
+			system("cls");
+		}
+		delayprint("\n\t\tThe Battle has started\n", 100);
+		cout << endl;
 		king.health = 2450;
 		character.hero_health = 2000;
 		while (king.health >= 1 && character.hero_health >= 1)
 		{
-			cout << "\n\tHero turn:" << endl;
-			cout << "Press A to Attack : ";
+			delayprint("Hero turn.... Press A to Attack :  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
+				cout << endl;
 				if (hero_attack_button == 'A' || hero_attack_button == 'a')
 				{
-					character.hero_damage = 130 + (rand() % 170);
-					cout << "Hero Attack : " << character.hero_damage;
+					if (character.hero_health < 50)
+						break;
+					else
+					{
+						character.hero_damage = 130 + (rand() % 170);
+						delayprint("Hero is attacking...... Hero Damage : ", 70);
+						cout << character.hero_damage;
+					}
 				}
 				if (hero_attack_button != 'A' && hero_attack_button != 'a')
+				{
 					cout << "Invalid Attack Button, Press A to Attack : ";
+				}
 			} while (hero_attack_button != 'A' && hero_attack_button != 'a');
 			king.health = king.health - character.hero_damage;
-			cout << "\nKing Attack: ";
+			delayprint("\nMonster health = ", 70);
+			cout << king.health;
+			cout << endl;
+			cout << endl;
+			if (king.health < 50)
+				break;
+			delayprint("King Turn...... King is attacking... ", 70);
 			king.damage = 89 + (rand() % 160);
+			delayprint("King Damage : ", 70);
 			cout << king.damage;
 			character.hero_health = character.hero_health - king.damage;
+			delayprint("\nHero Health = ", 70);
+			cout << character.hero_health;
+			cout << endl;
+			cout << endl;
 			continue;
 		}
 		system("cls");
-		if (king.health <= 50)
+		if (king.health < 50)
 		{
 
-			cout << "\n\tYou killed The Boss with the final attack\n\tThe boss is defeated\n";
-			character.hero_health = 2450;
-			cout << "Your Hero has been promoted to level 3. healthpoints and damage is increased;" << endl;
-		}
-		else if (character.hero_health < 100)
-		{
-			king.health = 2450;
+			delayprint("\n\tYou killed The King with the final attack\n\tThe boss is defeated", 75);
 			character.hero_health = 2000;
-			cout << "\nYou Died , \n\t The king killed you.\n";
+			delayprint("\n\tYour Hero has been promoted to level 2. healthpoints and damage is increased, experience point reseted", 75);
+			cout << endl;
+			character.level = 2;
 		}
-		cout << "Press 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
+		else if (character.hero_health < 50)
+		{
+			king.health = 2000;
+			character.hero_health = 1584;
+			delayprint("\n\tYou Died....The King killed you.\n", 75);
+			character.level = 1;
+		}
+		cout << "\nPress 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
 		do
 		{
 			cin >> try_again_choice;
 			if (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4')
-				cout << "Invalid Quest Selection, select again : ";
+				cout << "Invalid Selection, select again : ";
 		} while (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4');
 		if (try_again_choice == '2')
 		{
@@ -837,57 +871,89 @@ void quest_2_function(struct quest_2_boss)
 // FUNCTION OF QUEST 3
 void quest_3_function(struct quest_3_boss)
 {
-	char try_again_choice;
+	char try_again_choice = '0';
 	char hero_attack_button;
+	cout << endl;
 	display_character(character);
-	srand((unsigned)time(NULL));       //This Boss Will be MEDIUM as it is the first Quest
+	cout << endl;
+	cout << "Gunsmith health = 2900\n";
+	cout << "Gunsmith Level = 15 ";
+	cout << endl;
+	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
 	do
 	{
-		cout << "The Battle has started" << endl;
+		if (try_again_choice == '1')
+		{
+			system("cls");
+		}
+		delayprint("\n\t\tThe Battle has started\n", 100);
+		cout << endl;
 		gunsmith.health = 2900;
 		character.hero_health = 2450;
 		while (gunsmith.health >= 1 && character.hero_health >= 1)
 		{
-			cout << "\n\tHero turn:" << endl;
-			cout << "Press A to Attack : ";
+			delayprint("Hero turn.... Press A to Attack :  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
+				cout << endl;
 				if (hero_attack_button == 'A' || hero_attack_button == 'a')
 				{
-					character.hero_damage = 170 + (rand() % 190);
-					cout << "Hero Attack : " << character.hero_damage;
+					if (character.hero_health < 50)
+						break;
+					else
+					{
+						character.hero_damage = 170 + (rand() % 200);
+						delayprint("Hero is attacking...... Hero Damage : ", 70);
+						cout << character.hero_damage;
+					}
 				}
 				if (hero_attack_button != 'A' && hero_attack_button != 'a')
+				{
 					cout << "Invalid Attack Button, Press A to Attack : ";
+				}
 			} while (hero_attack_button != 'A' && hero_attack_button != 'a');
 			gunsmith.health = gunsmith.health - character.hero_damage;
-			cout << "\nShot Damage: ";
-			gunsmith.damage = 119 + (rand() % 200);
+			delayprint("\nMonster health = ", 70);
+			cout << gunsmith.health;
+			cout << endl;
+			cout << endl;
+			if (gunsmith.health < 50)
+				break;
+			delayprint("Monster Turn...... Monster is attacking... ", 70);
+			gunsmith.damage = 119 + (rand() % 210);
+			delayprint("Monster Damage : ", 70);
 			cout << gunsmith.damage;
 			character.hero_health = character.hero_health - gunsmith.damage;
+			delayprint("\nHero Health = ", 70);
+			cout << character.hero_health;
+			cout << endl;
+			cout << endl;
 			continue;
 		}
 		system("cls");
-		if (gunsmith.health <= 50)
+		if (gunsmith.health < 50)
 		{
 
-			cout << "\n\tYou killed The Boss with the final attack\n\tThe boss is defeated\n";
+			delayprint("\n\tYou killed The Gunsmith with the final attack\n\tThe gunsmith is defeated", 75);
 			character.hero_health = 2900;
-			cout << "Your Hero has been promoted to level 3. healthpoints and damage is increased;" << endl;
+			delayprint("\n\tYour Hero has been promoted to level 3. healthpoints and damage is increased, experience point reseted", 75);
+			cout << endl;
+			character.level = 3;
 		}
-		else if (character.hero_health < 100)
+		else if (character.hero_health < 50)
 		{
 			gunsmith.health = 2900;
 			character.hero_health = 2450;
-			cout << "\nYou Died , \n\t The monster killed you.\n";
+			delayprint("\n\tYou Died....The Gunsmith killed you.\n", 75);
+			character.level = 2;
 		}
-		cout << "Press 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
+		cout << "\nPress 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
 		do
 		{
 			cin >> try_again_choice;
 			if (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4')
-				cout << "Invalid Quest Selection, select again : ";
+				cout << "Invalid Selection, select again : ";
 		} while (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4');
 		if (try_again_choice == '2')
 		{
@@ -910,57 +976,89 @@ void quest_3_function(struct quest_3_boss)
 // FUNCTION OF QUEST 4
 void quest_4_function(struct quest_4_boss)
 {
-	char try_again_choice;
+	char try_again_choice = '0';
 	char hero_attack_button;
+	cout << endl;
 	display_character(character);
-	srand((unsigned)time(NULL));       //This Boss Will be MEDIUM as it is the first Quest
+	cout << endl;
+	cout << "Dragon health = 3350\n";
+	cout << "Dragon Level = 20 ";
+	cout << endl;
+	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
 	do
 	{
-		cout << "The Battle has started" << endl;
+		if (try_again_choice == '1')
+		{
+			system("cls");
+		}
+		delayprint("\n\t\tThe Battle has started\n", 100);
+		cout << endl;
 		dragon.health = 3350;
 		character.hero_health = 2900;
 		while (dragon.health >= 1 && character.hero_health >= 1)
 		{
-			cout << "\n\tHero turn:" << endl;
-			cout << "Press A to Attack : ";
+			delayprint("Hero turn.... Press A to Attack :  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
+				cout << endl;
 				if (hero_attack_button == 'A' || hero_attack_button == 'a')
 				{
-					character.hero_damage = 210 + (rand() % 210);
-					cout << "Hero Attack : " << character.hero_damage;
+					if (character.hero_health < 50)
+						break;
+					else
+					{
+						character.hero_damage = 210 + (rand() % 210);
+						delayprint("Hero is attacking...... Hero Damage : ", 70);
+						cout << character.hero_damage;
+					}
 				}
 				if (hero_attack_button != 'A' && hero_attack_button != 'a')
+				{
 					cout << "Invalid Attack Button, Press A to Attack : ";
+				}
 			} while (hero_attack_button != 'A' && hero_attack_button != 'a');
 			dragon.health = dragon.health - character.hero_damage;
-			cout << "\nDragon Attack: ";
+			delayprint("\nDragon health = ", 70);
+			cout << dragon.health;
+			cout << endl;
+			cout << endl;
+			if (dragon.health < 50)
+				break;
+			delayprint("Dragon Turn...... Dragon is attacking... ", 70);
 			dragon.damage = 149 + (rand() % 240);
+			delayprint("Dragon Burn : ", 70);
 			cout << dragon.damage;
 			character.hero_health = character.hero_health - dragon.damage;
+			delayprint("\nHero Health = ", 70);
+			cout << character.hero_health;
+			cout << endl;
+			cout << endl;
 			continue;
 		}
 		system("cls");
-		if (dragon.health <= 50)
+		if (dragon.health < 50)
 		{
 
-			cout << "\n\tYou killed The Boss with the final attack\n\tThe boss is defeated\n";
+			delayprint("\n\tYou killed The Dragon with the final attack\n\tThe dragon is defeated", 75);
 			character.hero_health = 3350;
-			cout << "Your Hero has been promoted to level 3. healthpoints and damage is increased;" << endl;
+			delayprint("\n\tYour Hero has been promoted to level 4. healthpoints and damage is increased, experience point reseted", 75);
+			character.level = 4;
+			cout << endl;
 		}
-		else if (character.hero_health < 100)
+		else if (character.hero_health < 50)
 		{
 			dragon.health = 3350;
 			character.hero_health = 2900;
-			cout << "\nYou Died , \n\t The monster killed you.\n";
+			delayprint("\n\tYou Died....The Dragon Burned you.\n", 75);
+			character.level = 3;
 		}
-		cout << "Press 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
+		cout << "\nPress 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
 		do
 		{
 			cin >> try_again_choice;
 			if (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4')
-				cout << "Invalid Quest Selection, select again : ";
+				cout << "Invalid Selection, select again : ";
 		} while (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4');
 		if (try_again_choice == '2')
 		{
@@ -981,56 +1079,86 @@ void quest_4_function(struct quest_4_boss)
 }
 void final_boss(struct final_boss)
 {
-	char try_again_choice;
+	char try_again_choice = '0';
 	char hero_attack_button;
+	cout << endl;
 	display_character(character);
-	srand((unsigned)time(NULL));       //This Boss Will be MEDIUM as it is the first Quest
+	cout << endl;
+	cout << "The Witch health = 4000\n";
+	cout << "The Witch Level = 27 ";
+	cout << endl;
+	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
 	do
 	{
-		cout << "The Battle has started" << endl;
-		dragon.health = 4000;
-		character.hero_health = 3350;
-		while (dragon.health >= 1 && character.hero_health >= 1)
+		if (try_again_choice == '1')
 		{
-			cout << "\n\tHero turn:" << endl;
-			cout << "Press A to Attack : ";
+			system("cls");
+		}
+		delayprint("\n\t\tThe Battle has started\n", 100);
+		cout << endl;
+		the_witch.health = 4000;
+		character.hero_health = 3350;
+		while (the_witch.health >= 1 && character.hero_health >= 1)
+		{
+			delayprint("Hero turn.... Press A to Attack :  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
+				cout << endl;
 				if (hero_attack_button == 'A' || hero_attack_button == 'a')
 				{
-					character.hero_damage = 260 + (rand() % 280);
-					cout << "Hero Attack : " << character.hero_damage;
+					if (character.hero_health < 50)
+						break;
+					else
+					{
+						character.hero_damage = 260 + (rand() % 280);
+						delayprint("Hero is attacking...... Hero Damage : ", 70);
+						cout << character.hero_damage;
+					}
 				}
 				if (hero_attack_button != 'A' && hero_attack_button != 'a')
+				{
 					cout << "Invalid Attack Button, Press A to Attack : ";
+				}
 			} while (hero_attack_button != 'A' && hero_attack_button != 'a');
 			the_witch.health = the_witch.health - character.hero_damage;
-			cout << "\nWitch Magic: ";
-			the_witch.damage = 190 + (rand() % 290);
+			delayprint("\nWitch health = ", 70);
+			cout << the_witch.health;
+			cout << endl;
+			cout << endl;
+			if (the_witch.health < 50)
+				break;
+			delayprint("Monster Turn...... Monster is attacking... ", 70);
+			the_witch.damage = 200 + (rand() % 290);
+			delayprint("Monster Damage : ", 70);
 			cout << the_witch.damage;
 			character.hero_health = character.hero_health - the_witch.damage;
+			delayprint("\nHero Health = ", 70);
+			cout << character.hero_health;
+			cout << endl;
+			cout << endl;
 			continue;
 		}
 		system("cls");
-		if (the_witch.health <= 50)
+		if (the_witch.health < 50)
 		{
 
-			cout << "\n\tYou killed The Boss with the final attack\n\tThe boss is defeated\n";
-			cout << "Your Hero has finished the game" << endl;
+			delayprint("\n\tYou killed The Witch with the final attack\n\tThe boss is defeated", 75);
+			delayprint("\n\tYour Hero has completed the game", 75);
+			cout << endl;
 		}
-		else if (character.hero_health < 100)
+		else if (character.hero_health < 50)
 		{
-			dragon.health = 4000;
+			the_witch.health = 4000;
 			character.hero_health = 3350;
-			cout << "\nYou Died , \n\t The evil witch made you a statue.\n";
+			delayprint("\n\tYou Died....The Witch made you a statue with her magic.\n", 75);
 		}
-		cout << "Press 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
+		cout << "\nPress 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
 		do
 		{
 			cin >> try_again_choice;
 			if (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4')
-				cout << "Invalid Quest Selection, select again : ";
+				cout << "Invalid Selection, select again : ";
 		} while (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4');
 		if (try_again_choice == '2')
 		{
@@ -1039,13 +1167,13 @@ void final_boss(struct final_boss)
 		}
 		else if (try_again_choice == '3')
 		{
-				system("cls");
-				main_menu();
+			system("cls");
+			main_menu();
 		}
 		else if (try_again_choice == '4')
 		{
-				system("cls");
-				exit;
+			system("cls");
+			exit;
 		}
 	} while (try_again_choice == '1');
 }
