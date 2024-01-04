@@ -118,11 +118,11 @@ static void take_input_character(struct character_information)
 {
 	cout << "You have to select hero from one of the following hero,(Each of the character has its own weapon and style)" << endl;
 	cout << "1. Valkriye " << endl;
-	cout << "Fights with an axe around her,Tough melee Fighter and deals area damage around her " << endl;// Enter description of valkriye
+	cout << "Fights with an axe around her,Tough melee Fighter and deals area damage around her. " << endl;// Enter description of valkriye
 	cout << "2. Magic Archer" << endl;
-	cout << "Not quite a Wizard, nor an Archer - he shoots a magic arrow that passes through and damages all the enemies in its path" << endl; //Enter description of gaint
+	cout << "Not quite a Wizard, nor an Archer - he shoots a magic arrow that passes through and damages all the enemies in its path." << endl; //Enter description of gaint
 	cout << "3. Prince " << endl;
-	cout << "The prince rides an horse and deals area damage and lets his spiked club do the talking for him" << endl;// Enter desciption of Hog Rider
+	cout << "The prince rides an horse and deals area damage and lets his spiked club do the talking for him." << endl;// Enter desciption of Hog Rider
 	do {
 		cout << "Select your character(e,g 1,2,3) : ";
 		cin >> character.hero_choose;
@@ -174,14 +174,14 @@ void display_character(struct character_information) // DISPLAY HERO OR CHARACTE
 void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct quest_3_boss, struct quest_4_boss, struct final_boss)
 {
 	char quest_choice;
-	delayprint("\tYou can Embark on different Quests.\n", 75);
-	delayprint("\t\nEach quest have different difficulty level.\n", 75);
+	cout<<"\tYou can Embark on different Quests.\n";
+	cout<<"\t\nEach quest have different difficulty level.\n";
+	cout<<"\nA.THE FORGOTTEN RACE.\n";
+	cout<<"B.ARMY OF THE KING.\n";
+	cout<<"C.THE JURY.\n";
+	cout<<"D.THE DRAGON KING.\n";
+	cout<<"E.THE FINAL WITCH.\n";
 	cout << endl;
-	delayprint("A.THE FORGOTTEN RACE.\n", 75);
-	delayprint("B.ARMY OF THE KING.\n", 75);
-	delayprint("C.THE JURY.\n", 75);
-	delayprint("D.THE DRAGON KING.\n", 75);
-	delayprint("E.THE FINAL WITCH.\n", 75);
 	cout<< "NOTE : If you select a quest you have already completed, your health points and damage will be calibrated" << endl
 		<< "Enter the quest you want to play(You can only select the unlocked quests) "
 		<<"otherwise, it would not play the quest (e.g.A, B): ";
@@ -197,7 +197,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 		case 'A':
 		{
 			system("cls");
-			cout << "\n\t The forgotten Race." << endl;
+			delayprint("\n\t\tTHE FORGOTTEN RACE",75);
+			cout << endl;
 			quest_1_function(monster);
 			break;
 			
@@ -225,7 +226,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 					if (quest_choice == 'A')
 					{
 						system("cls");
-						cout << "\n\t The forgotten Race." << endl;
+						delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+						cout << endl;
 						quest_1_function(monster);
 					}
 					else 
@@ -276,7 +278,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 								else if (quest_choice == 'A')
 								{
 									system("cls");
-									cout << "The Forgotten Race" << endl;
+									delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+									cout << endl;
 									quest_1_function(monster);
 								}
 							} while (quest_choice!='a'&&quest_choice!='A');
@@ -286,7 +289,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 					else if (quest_choice == 'A')
 					{
 						system("cls");
-						cout << "\n\t The forgotten Race." << endl;
+						delayprint("\n\t\tTHE FORGOTTEN RACE", 75);
+						cout<< endl;
 						quest_1_function(monster);
 					}
 					else
@@ -336,7 +340,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 								else if (quest_choice == 'A')
 								{
 									system("cls");
-									cout << "The Forgotten Race" << endl;
+									delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+									cout << endl;
 									quest_1_function(monster);
 								}
 							} while (quest_choice != 'a' && quest_choice != 'A');
@@ -346,7 +351,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 					else if (quest_choice == 'A')
 					{
 						system("cls");
-						cout << "\n\t The forgotten Race." << endl;
+						delayprint("\n\t\tTHE FORGOTTEN RACE", 75);
+						cout << endl;
 						quest_1_function(monster);
 					}
 					else if (quest_choice == 'C')
@@ -373,7 +379,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 								else if (quest_choice == 'A')
 								{
 									system("cls");
-									cout << "The Forgotten Race" << endl;
+									delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+									cout << endl;
 									quest_1_function(monster);
 								}
 								else if (quest_choice == 'B')
@@ -398,7 +405,9 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 												cout << "Invalid Selection, try again : ";
 											else if (quest_choice == 'A')
 											{
-												cout << "The Forgotten Race" << endl;
+												system("cls");
+												delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+												cout << endl;
 												quest_1_function(monster);
 											}
 										} while (quest_choice != 'a' && quest_choice != 'A');
@@ -454,7 +463,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 								else if (quest_choice == 'A')
 								{
 									system("cls");
-									cout << "The Forgotten Race" << endl;
+									delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+									cout << endl;
 									quest_1_function(monster);
 								}
 							} while (quest_choice != 'a' && quest_choice != 'A');
@@ -464,7 +474,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 					else if (quest_choice == 'A')
 					{
 						system("cls");
-						cout << "\n\t The forgotten Race." << endl;
+						delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+						cout << endl;
 						quest_1_function(monster);
 						break;
 					}
@@ -491,7 +502,9 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 									cout << "Invalid Selection, try again : ";
 								else if (quest_choice == 'A')
 								{
-									cout << "The Forgotten Race" << endl;
+									system("cls");
+									delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+									cout << endl;
 									quest_1_function(monster);
 								}
 								else if (quest_choice == 'B')
@@ -517,7 +530,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 											else if (quest_choice == 'A')
 											{
 												system("cls");
-												cout << "The Forgotten Race" << endl;
+												delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+												cout << endl;
 												quest_1_function(monster);
 											}
 										} while (quest_choice != 'a' && quest_choice != 'A');
@@ -550,7 +564,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 								else if (quest_choice == 'A')
 								{
 									system("cls");
-									cout << "The Forgotten Race" << endl;
+									delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+									cout << endl;
 									quest_1_function(monster);
 								}
 								else if (quest_choice == 'B')
@@ -576,7 +591,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 											else if (quest_choice == 'A')
 											{
 												system("cls");
-												cout << "The Forgotten Race" << endl;
+												delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+												cout << endl;
 												quest_1_function(monster);
 											}
 										} while (quest_choice != 'a' && quest_choice != 'A');
@@ -605,7 +621,8 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 											else if (quest_choice == 'A')
 											{
 												system("cls");
-												cout << "The Forgotten Race" << endl;
+												delayprint("\n\t\tTHE FORGOTTEN RACE", 75); 
+												cout << endl;
 												quest_1_function(monster);
 											}
 											else if (quest_choice == 'B')
@@ -641,74 +658,105 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 // FUNCTION OF QUEST 1
 void quest_1_function(struct quest_1_boss)
 {
-	char try_again_choice ;
+	char try_again_choice='0';
 	char hero_attack_button;
-	/*string quest_1_message = " This Quest was the battle in which the forgotten race namely"
-		"the race of dragons which were thought to be extinct millions of years "
-		"ago but our hero was not shocked to see them as he had battles with monsters "
-		"and oher creatures but this time the hero was also frightened as the dragon was "
-		"enormous and had a menacing aura due to which the hero was not feeling well.Still "
-		"He fights for everyone and is determined to defeat the monster.Fight Starts";*/
+	cout << endl;
 	display_character(character);
+	cout << endl;
+	cout << "Monster health = 2000\n";
+	cout << "Monster Level = 5 ";
+	cout << endl;
 	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
 	do
 	{
-		cout << "The Battle has started" << endl;
+		if (try_again_choice == '1')
+		{
+			system("cls");
+		}
+		delayprint("\n\t\tThe Battle has started\n", 100);
+		cout << endl;
 		monster.health = 2000;
 		character.hero_health = 1584;
 		while (monster.health >= 1 && character.hero_health >= 1)
 		{
-
-			cout << "\n\tHero turn:" << endl;
-			cout << "Press A to Attack : ";
+			delayprint("Hero turn.... Press A to Attack :  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
+				cout << endl;
 				if (hero_attack_button == 'A' || hero_attack_button == 'a')
 				{
-					character.hero_damage = 90 + (rand() % 150);
-					cout << "Hero Attack : " << character.hero_damage;
+					if (character.hero_health < 50)
+						break;
+					else
+					{
+						character.hero_damage = 90 + (rand() % 150);
+						delayprint("Hero is attacking...... Hero Damage : ", 70);
+						cout << character.hero_damage;
+					}
 				}
 				if (hero_attack_button != 'A' && hero_attack_button != 'a')
+				{
 					cout << "Invalid Attack Button, Press A to Attack : ";
+				}
 			} while (hero_attack_button != 'A' && hero_attack_button != 'a');
 			monster.health = monster.health - character.hero_damage;
-			cout << "\nMonster Turn:" << endl;
+			delayprint("\nMonster health = ", 70);
+			cout << monster.health;
+			cout << endl;
+			cout << endl;
+			if (monster.health < 50)
+				break;
+			delayprint("Monster Turn...... Monster is attacking... ", 70);
 			monster.damage = 59 + (rand() % 140);
-			cout << "Monster Damage " << monster.damage;
+			delayprint("Monster Damage : ", 70);
+			cout << monster.damage;
 			character.hero_health = character.hero_health - monster.damage;
+			delayprint("\nHero Health = ", 70);
+			cout << character.hero_health;
+			if (monster.health < 50)
+				break;
+			cout << endl;
+			cout << endl;
 			continue;
 		}
 		system("cls");
-		if (monster.health <= 50)
+		if (monster.health < 50)
 		{
 
-			cout << "\n\tYou killed The Boss with the final attack\n\tThe boss is defeated\n";
+			delayprint("\n\tYou killed The Boss with the final attack\n\tThe boss is defeated",75);
 			character.hero_health = 2000;
-			cout << "Your Hero has been promoted to level 1. healthpoints and damage is increased, expiernce point resetted;" << endl;
+			delayprint("\n\tYour Hero has been promoted to level 1. healthpoints and damage is increased, experience point reseted", 75);
+			cout << endl;
 		}
-		else if (character.hero_health < 100)
+		else if (character.hero_health < 50)
 		{
 			monster.health = 2000;
 			character.hero_health = 1584;
-			cout << "\nYou Died , \n\t The monster killed you.\n";
+			delayprint("\n\tYou Died....The monster killed you.\n",75);
 		}
-		cout << "Press 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
+		cout << "\nPress 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
 		do
 		{
 			cin >> try_again_choice;
 			if (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4')
-				cout << "Invalid Quest Selection, select again : ";
+				cout << "Invalid Selection, select again : ";
 		} while (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4');
 		if (try_again_choice == '2')
+		{
 			system("cls");
 			quest_selection_function(monster, king, gunsmith, dragon, the_witch);
-		if (try_again_choice == '3')
+		}
+		else if (try_again_choice == '3')
+		{
 			system("cls");
 			main_menu();
-		if (try_again_choice == '4')
+		}
+		else if (try_again_choice == '4')
+		{
 			system("cls");
 			exit;
+		}
 	} while (try_again_choice == '1');
 }
 
@@ -717,12 +765,6 @@ void quest_2_function(struct quest_2_boss)
 {
 	char try_again_choice;
 	char hero_attack_button;
-	/*string quest_2_message = " This Quest was the battle in which the forgotten race namely"
-		"the race of dragons which were thought to be extinct millions of years "
-		"ago but our hero was not shocked to see them as he had battles with monsters "
-		"and oher creatures but this time the hero was also frightened as the dragon was "
-		"enormous and had a menacing aura due to which the hero was not feeling well.Still "
-		"He fights for everyone and is determined to defeat the monster.Fight Starts";*/
 	display_character(character);
 	srand((unsigned)time(NULL));
 	//This Boss Will be MEDIUM as it is the first Quest
@@ -775,14 +817,20 @@ void quest_2_function(struct quest_2_boss)
 				cout << "Invalid Quest Selection, select again : ";
 		} while (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4');
 		if (try_again_choice == '2')
+		{
 			system("cls");
 			quest_selection_function(monster, king, gunsmith, dragon, the_witch);
-		if (try_again_choice == '3')
+		}
+		else if (try_again_choice == '3')
+		{
 			system("cls");
 			main_menu();
-		if (try_again_choice == '4')
+		}
+		else if (try_again_choice == '4')
+		{
 			system("cls");
 			exit;
+		}
 	} while (try_again_choice == '1');
 }
 
@@ -791,12 +839,6 @@ void quest_3_function(struct quest_3_boss)
 {
 	char try_again_choice;
 	char hero_attack_button;
-	/*string quest_3_message = " This Quest was the battle in which the forgotten race namely"
-		"the race of dragons which were thought to be extinct millions of years "
-		"ago but our hero was not shocked to see them as he had battles with monsters "
-		"and oher creatures but this time the hero was also frightened as the dragon was "
-		"enormous and had a menacing aura due to which the hero was not feeling well.Still "
-		"He fights for everyone and is determined to defeat the monster.Fight Starts";*/
 	display_character(character);
 	srand((unsigned)time(NULL));       //This Boss Will be MEDIUM as it is the first Quest
 	do
@@ -848,14 +890,20 @@ void quest_3_function(struct quest_3_boss)
 				cout << "Invalid Quest Selection, select again : ";
 		} while (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4');
 		if (try_again_choice == '2')
+		{
 			system("cls");
 			quest_selection_function(monster, king, gunsmith, dragon, the_witch);
-		if (try_again_choice == '3')
+		}
+		else if (try_again_choice == '3')
+		{
 			system("cls");
 			main_menu();
-		if (try_again_choice == '4')
+		}
+		else if (try_again_choice == '4')
+		{
 			system("cls");
 			exit;
+		}
 	} while (try_again_choice == '1');
 }
 
@@ -864,12 +912,6 @@ void quest_4_function(struct quest_4_boss)
 {
 	char try_again_choice;
 	char hero_attack_button;
-	/*string quest_4_message = " This Quest was the battle in which the forgotten race namely"
-		"the race of dragons which were thought to be extinct millions of years "
-		"ago but our hero was not shocked to see them as he had battles with monsters "
-		"and oher creatures but this time the hero was also frightened as the dragon was "
-		"enormous and had a menacing aura due to which the hero was not feeling well.Still "
-		"He fights for everyone and is determined to defeat the monster.Fight Starts";*/
 	display_character(character);
 	srand((unsigned)time(NULL));       //This Boss Will be MEDIUM as it is the first Quest
 	do
@@ -921,14 +963,20 @@ void quest_4_function(struct quest_4_boss)
 				cout << "Invalid Quest Selection, select again : ";
 		} while (try_again_choice != '1' && try_again_choice != '2' && try_again_choice != '3' && try_again_choice != '4');
 		if (try_again_choice == '2')
+		{
 			system("cls");
 			quest_selection_function(monster, king, gunsmith, dragon, the_witch);
-		if (try_again_choice == '3')
+		}
+		else if (try_again_choice == '3')
+		{
 			system("cls");
 			main_menu();
-		if (try_again_choice == '4')
+		}
+		else if (try_again_choice == '4')
+		{
 			system("cls");
 			exit;
+		}
 	} while (try_again_choice == '1');
 }
 void final_boss(struct final_boss)
@@ -989,16 +1037,16 @@ void final_boss(struct final_boss)
 			system("cls");
 			quest_selection_function(monster, king, gunsmith, dragon, the_witch);
 		}
-			if (try_again_choice == '3')
-			{
+		else if (try_again_choice == '3')
+		{
 				system("cls");
 				main_menu();
-			}
-			if (try_again_choice == '4')
-			{
+		}
+		else if (try_again_choice == '4')
+		{
 				system("cls");
 				exit;
-			}
+		}
 	} while (try_again_choice == '1');
 }
 //FUNCTION TO PRINT THE TEXT WITH A LITTLE DELAY
