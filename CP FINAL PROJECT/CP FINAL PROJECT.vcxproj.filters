@@ -15,13 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Characters.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="final boss.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="attak.cpp">
+    <ClCompile Include="Final Code.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
