@@ -1,9 +1,10 @@
 #include<iostream>
 #include<string>
 #include<math.h>
-#include<cstdlib>
+#include<cstdlib>	 // USED IN RANDOM ATTACKS GENERATING
 #include <thread>
 #include <chrono>
+#include<fstream>
 using namespace std;
 struct character_information // STORES INFORMATION ABOUT THE HERO OR CHARACTER
 {
@@ -45,13 +46,14 @@ struct quest_4_boss // STORES INFORMATION ABOUT QUEST 4 BOSS WHICH IS A DRAGON
 	int level = 15;
 }dragon;
 
-struct final_boss
+struct final_boss // STORES INFORMATION ABOUT FINAL BOSS
 {
 	int health = 4000;
 	int damage = 0;
 	int level = 20;
 }the_witch;
 
+int high_score = 0;//Global Variable for high score
 
 // FUNCTIONS PROTOYPES OF ALL THE FUNCTIONS USED IN THE PROGRAM
 void main_menu();
@@ -65,6 +67,9 @@ void quest_3_function(struct quest_3_boss);
 void quest_4_function(struct quest_4_boss);
 void final_boss(struct final_boss);
 void delayprint(const string& text, int milliseconds);
+void displayhighscore();
+void savehighScore();
+void readhighscore();
 // INT MAIN
 int main()
 {
@@ -72,16 +77,15 @@ int main()
 	game_loop();
 	return 0;
 }
-void game_loop()
+void game_loop() // THIS FUNCTION SHOWS MAIN MENU AND RUNS A LOOP UNTIL USER EXITS
 {
 	string playagain;
-	cout << "\t\tWelcome To Eldoria\n";
 	do
 	{
 		main_menu();
 		cout << "Do you want to play again? (Y/N): ";
 		cin >> playagain;
-		if (playagain != "y" || playagain != "Y")
+		if (playagain != "y" && playagain != "Y")
 		{
 			system("cls");
 			cout << "Exiting the game. Goodbye!" << endl;
@@ -93,13 +97,15 @@ void game_loop()
 void main_menu()
 {
 	string choice;
+	cout << "\t\t\tWelcome To Eldoria\n";
 	cout << "Main Menu\n";
 	cout << "1.Start\n";
-	cout << "2.Exit\n";
-	cout << "Enter your choice (1,2):";
+	cout << "2.High Score\n";
+	cout << "3.Exit\n";
+	cout << "Enter your choice (1,2,3):";
 	do {
 		cin >> choice;
-		if (cin.fail() || choice > "0" || choice < "3")
+		if (cin.fail() || choice > "0" || choice < "3") //CIN.FAILS CHECKS IF THE INPUT IS CORRECT OR NOT(PRE BUILD FUNCTION)
 		{
 			cin.clear();
 		}
@@ -109,6 +115,30 @@ void main_menu()
 			take_input_character(character);
 			system("cls");
 			quest_selection_function(monster, king, gunsmith, dragon, the_witch);
+		}
+		else if (choice == "2")
+		{
+			system("cls");
+			displayhighscore();
+			cout << "Press B to go back to main menu : ";
+			do
+			{
+				cin >> choice;
+				if (cin.fail() || character.hero_choose > "0" || character.hero_choose < "2")
+				{
+					cin.clear();
+				}
+				if (choice == "B" || choice == "b")
+				{
+					system("cls");
+					main_menu();
+					break;
+				}
+				else
+				{
+					cout << "Invalid Selection, Try again : ";
+				}
+			} while (choice != "B" && choice != "b");
 		}
 		else if (choice != "1" && choice != "2")
 		{
@@ -125,14 +155,20 @@ void main_menu()
 static void take_input_character(struct character_information)
 {
 	cout << "You have to select hero from one of the following hero,(Each of the character has its own weapon and style)" << endl;
+	cout << endl;
 	cout << "1. Valkriye " << endl;
 	cout << "Fights with an axe around her,Tough melee Fighter and deals area damage around her. " << endl;// Enter description of valkriye
 	cout << "2. Magic Archer" << endl;
 	cout << "Not quite a Wizard, nor an Archer - he shoots a magic arrow that passes through and damages all the enemies in its path." << endl; //Enter description of gaint
 	cout << "3. Prince " << endl;
 	cout << "The prince rides an horse and deals area damage and lets his spiked club do the talking for him." << endl;// Enter desciption of Hog Rider
-	do {
-		cout << "Select your character(e,g 1,2,3) : ";
+	cout << endl;
+	cout << "NOTE : Once character selected, it can only be changed after a quest completion";
+	cout << endl;
+	cout << endl;
+	do 
+	{
+		cout << "Select your character(e,g 1,2,3) OR Press B to go back to main menu : ";
 		cin >> character.hero_choose;
 		if (cin.fail() || character.hero_choose > "0" || character.hero_choose < "4")
 		{
@@ -146,6 +182,7 @@ static void take_input_character(struct character_information)
 			character.hero_experience_level = 0;
 			character.hero_weapon = "Axe";
 			character.hero_damage = 0;
+			character.level = 0;
 		}
 		else if (character.hero_choose == "2")
 		{
@@ -155,6 +192,7 @@ static void take_input_character(struct character_information)
 			character.hero_experience_level = 0;
 			character.hero_weapon = "Bow And Magic Arrow";
 			character.hero_damage = 0;
+			character.level = 0;
 		}
 		else if (character.hero_choose == "3")
 		{
@@ -164,12 +202,19 @@ static void take_input_character(struct character_information)
 			character.hero_experience_level = 0;
 			character.hero_weapon = "Spiked Club";
 			character.hero_damage = 0;
+			character.level = 0;
+		}
+		else if (character.hero_choose == "B" || character.hero_choose == "b")
+		{
+			system("cls");
+			main_menu();
+			break;
 		}
 		else
 		{
 			cout << "Invalid choice, please try again." << endl;
 		}
-	} while (character.hero_choose != "1" && character.hero_choose != "2" && character.hero_choose != "3");
+	} while (character.hero_choose != "1" && character.hero_choose != "2" && character.hero_choose != "3" && character.hero_choose != "B" && character.hero_choose != "b");
 }
 
 void display_character(struct character_information) // DISPLAY HERO OR CHARACTER INFORMATION
@@ -186,6 +231,8 @@ void display_character(struct character_information) // DISPLAY HERO OR CHARACTE
 void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct quest_3_boss, struct quest_4_boss, struct final_boss)
 {
 	string quest_choice;
+	cout << endl;
+	cout << endl;
 	cout << "\tYou can Embark on different Quests.\n";
 	cout << "\t\nEach quest have different difficulty level.\n";
 	cout << "\n1.THE FORGOTTEN RACE.\n";
@@ -194,10 +241,10 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 	cout << "4.THE DRAGON KING.\n";
 	cout << "5.THE FINAL WITCH.\n";
 	cout << endl;
-	cout << "NOTE : If you select a quest you have already completed, your health points and damage will be calibrated" << endl
+	cout << "NOTE : If you select a quest you have already completed, your health points and damage will be calibrated\n" << endl
 		<< "Enter the quest you want to play(You can only select the unlocked quests) "
-		<< "otherwise, it would not play the quest (e.g.1,2): ";
-	do
+		<< "otherwise, it would not play the quest (e.g.1,2) OR Press B to go to main menu : ";
+	do //THIS DO-WHILE CHECKS WHETHER THE FIRST INPUT IS CORRECT OR NOT.
 	{
 		cin >> quest_choice;
 		if (cin.fail() || quest_choice > "0" || quest_choice < "2")
@@ -317,7 +364,7 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 			if (monster.health < 50 && king.health < 50 && gunsmith.health < 50)
 			{
 				system("cls");
-				cout << "\n\t\t The DRAGON KING." << endl;
+				cout << "\n\t\t The DRAGON KING" << endl;
 				quest_4_function(dragon);
 				break;
 			}
@@ -553,7 +600,9 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 												cin.clear();
 											}
 											if (quest_choice != "1")
+											{
 												cout << "Invalid Selection, try again : ";
+											}
 											else if (quest_choice == "1")
 											{
 												system("cls");
@@ -615,9 +664,14 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 										do
 										{
 											cin >> quest_choice;
-											
+											if (cin.fail() || quest_choice > "0" || quest_choice < "3")
+											{
+												cin.clear();
+											}
 											if (quest_choice != "1")
+											{
 												cout << "Invalid Selection, try again : ";
+											}
 											else if (quest_choice == "1")
 											{
 												system("cls");
@@ -634,7 +688,7 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 									if (monster.health < 10 && king.health < 10)
 									{
 										system("cls");
-										cout << "\tThe Jury." << endl;
+										cout << "\n\t\t THE JURY" << endl;
 										quest_3_function(gunsmith);
 									}
 									else
@@ -647,8 +701,10 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 											{
 												cin.clear();
 											}
-											if (quest_choice != "1" && quest_choice != "2")
+											if (quest_choice != "1" && quest_choice!= "2")
+											{
 												cout << "Invalid Selection, try again : ";
+											}
 											else if (quest_choice == "1")
 											{
 												system("cls");
@@ -687,11 +743,17 @@ void quest_selection_function(struct quest_1_boss, struct quest_2_boss, struct q
 				} while (quest_choice != "1" && quest_choice != "2" && quest_choice != "3" && quest_choice != "4");
 			}
 		}
+		else if (quest_choice == "b" || quest_choice == "B")
+		{
+			system("cls");
+			main_menu();
+			break;
+		}
 		else
 		{
 			cout << "Invalid Option, try again : ";
 		}
-	} while (quest_choice != "1" && quest_choice != "2" && quest_choice != "3" && quest_choice != "4");
+	} while (quest_choice != "1" && quest_choice != "2" && quest_choice != "3" && quest_choice != "4" && quest_choice !="b" && quest_choice != "B");
 }
 
 // FUNCTION OF QUEST 1
@@ -699,6 +761,7 @@ void quest_1_function(struct quest_1_boss)
 {
 	string try_again_choice = "0";
 	string hero_attack_button;
+	int current_score;
 	cout << endl;
 	display_character(character);
 	cout << endl;
@@ -718,7 +781,7 @@ void quest_1_function(struct quest_1_boss)
 		character.hero_health = 1584;
 		while (monster.health >= 1 && character.hero_health >= 1)
 		{
-			delayprint("Hero turn.... Press A to Attack :  ", 70);
+			delayprint("Hero turn.... Press A to Attack OR B to go back to MAIN MENU :  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
@@ -729,16 +792,22 @@ void quest_1_function(struct quest_1_boss)
 				cout << endl;
 				if (hero_attack_button == "a" || hero_attack_button == "A")
 				{
-					if (character.hero_health < 50)
+					if (character.hero_health < 10)
 						break;
 					else
 					{
-						character.hero_damage = 90 + (rand() % 150);
+						character.hero_damage = 90 + (rand() % 170);
 						delayprint("Hero is attacking...... Hero Damage : ", 70);
 						cout << character.hero_damage;
 					}
 				}
-				if (hero_attack_button != "A" && hero_attack_button != "a")
+				if (hero_attack_button == "B" || hero_attack_button == "b")
+				{
+					system("cls");
+					main_menu();
+					break;
+				}
+				if (hero_attack_button != "A" && hero_attack_button != "a" && hero_attack_button != "b" && hero_attack_button != "B")
 				{
 					cout << "Invalid Attack Button, Press A to Attack : ";
 				}
@@ -748,7 +817,7 @@ void quest_1_function(struct quest_1_boss)
 			cout << monster.health;
 			cout << endl;
 			cout << endl;
-			if (monster.health < 50)
+			if (monster.health < 10)
 				break;
 			delayprint("Monster Turn...... Monster is attacking... ", 70);
 			monster.damage = 59 + (rand() % 140);
@@ -770,6 +839,16 @@ void quest_1_function(struct quest_1_boss)
 			delayprint("\n\tYour Hero has been promoted to level 1. healthpoints and damage is increased, experience point reseted", 75);
 			character.level = 1;
 			cout << endl;
+			current_score = 1000 - monster.health;
+			if (current_score > high_score)
+			{
+				high_score = current_score;
+				ofstream outFile("highscore.txt");
+				outFile << high_score;
+				outFile.close();
+				cout << "\nScore: " << high_score << endl;
+				savehighScore();
+			}
 		}
 		else if (character.hero_health < 50)
 		{
@@ -1262,4 +1341,28 @@ void delayprint(const string& text, int milliseconds)
 		cout << ch << flush; // Flush is a manipulator that ensures that the text is displayed immediatly without any buffer.
 		this_thread::sleep_for(chrono::milliseconds(milliseconds)); // Pre-build function to introduce delay
 	}
+}
+
+void readhighscore()
+{
+	ifstream inFile("highscore.txt");
+	if (inFile.is_open())
+	{
+		inFile >> high_score;
+		inFile.close();
+	}
+}
+void savehighScore()
+{
+	ofstream outFile("highscore.txt");
+	if (outFile.is_open())
+	{
+		outFile << high_score;
+		outFile.close();
+	}
+}
+void displayhighscore()
+{
+	readhighscore();
+	cout << "High Score: " << high_score << endl;
 }
