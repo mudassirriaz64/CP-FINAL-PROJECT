@@ -783,6 +783,7 @@ void quest_1_function(struct quest_1_boss)
 			delayprint("Hero turn.... Press A to Attack OR B to go back to MAIN MENU :  ", 70);
 			do
 			{
+				hero_attack_button = "0";
 				cin >> hero_attack_button;
 				if (cin.fail() || hero_attack_button > "0" || hero_attack_button < "B")
 				{
@@ -795,7 +796,7 @@ void quest_1_function(struct quest_1_boss)
 						break;
 					else
 					{
-						character.hero_damage = 90 + (rand() % 170);
+						character.hero_damage = 90 + (rand() % 150);
 						delayprint("Hero is attacking...... Hero Damage : ", 70);
 						cout << character.hero_damage;
 					}
@@ -913,6 +914,7 @@ void quest_2_function(struct quest_2_boss)
 			delayprint("Hero turn.... Press A to Attack to B to Main Menu :  ", 70);
 			do
 			{
+				hero_attack_button = "0";
 				cin >> hero_attack_button;
 				if (cin.fail() || hero_attack_button > "0" || hero_attack_button < "B")
 				{
@@ -926,7 +928,7 @@ void quest_2_function(struct quest_2_boss)
 						break;
 					else
 					{
-						character.hero_damage = 130 + (rand() % 170);
+						character.hero_damage = 115 + (rand() % 170);
 						delayprint("Hero is attacking...... Hero Damage : ", 70);
 						cout << character.hero_damage;
 					}
@@ -957,7 +959,6 @@ void quest_2_function(struct quest_2_boss)
 			character.hero_health = character.hero_health - king.damage;
 			delayprint("\nHero Health = ", 70);
 			cout << character.hero_health;
-			cout << endl;
 			cout << endl;
 			continue;
 		}
@@ -1045,6 +1046,7 @@ void quest_3_function(struct quest_3_boss)
 			delayprint("Hero turn.... Press A to Attack OR B to Main Menu :  ", 70);
 			do
 			{
+				hero_attack_button = "0";
 				cin >> hero_attack_button;
 				if (cin.fail() || hero_attack_button > "0" || hero_attack_button < "B")
 				{
@@ -1057,7 +1059,7 @@ void quest_3_function(struct quest_3_boss)
 						break;
 					else
 					{
-						character.hero_damage = 170 + (rand() % 200);
+						character.hero_damage = 160 + (rand() % 200);
 						delayprint("Hero is attacking...... Hero Damage : ", 70);
 						cout << character.hero_damage;
 					}
@@ -1175,6 +1177,7 @@ void quest_4_function(struct quest_4_boss)
 			delayprint("Hero turn.... Press A to Attack or B to MAIN MENU :  ", 70);
 			do
 			{
+				hero_attack_button = "0";
 				cin >> hero_attack_button;
 				if (cin.fail() || hero_attack_button > "0" || hero_attack_button < "B")
 				{
@@ -1187,7 +1190,7 @@ void quest_4_function(struct quest_4_boss)
 						break;
 					else
 					{
-						character.hero_damage = 210 + (rand() % 210);
+						character.hero_damage = 180 + (rand() % 210);
 						delayprint("Hero is attacking...... Hero Damage : ", 70);
 						cout << character.hero_damage;
 					}
@@ -1303,6 +1306,7 @@ void final_boss(struct final_boss)
 			delayprint("Hero turn.... Press A to Attack OR B to Main Menu:  ", 70);
 			do
 			{
+				hero_attack_button = "0";
 				cin >> hero_attack_button;
 				if (cin.fail() || hero_attack_button > "0" || hero_attack_button < "B")
 				{
@@ -1315,7 +1319,7 @@ void final_boss(struct final_boss)
 						break;
 					else
 					{
-						character.hero_damage = 260 + (rand() % 280);
+						character.hero_damage = 220 + (rand() % 260);
 						delayprint("Hero is attacking...... Hero Damage : ", 70);
 						cout << character.hero_damage;
 					}
