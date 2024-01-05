@@ -140,15 +140,14 @@ void main_menu()
 				}
 			} while (choice != "B" && choice != "b");
 		}
-		else if (choice != "1" && choice != "2")
-		{
-			cout << "Invalid Selection, try again : ";
-		}
-		else
+		else if (choice == "3")
 		{
 			break;
 		}
-		
+		else if (choice != "1" && choice != "2" && choice != "3")
+		{
+			cout << "Invalid Selection, try again : ";
+		}
 	} while (choice !="1" && choice!="2");
 }
 // THIS FUNCTION SELECTS THE HERO AND OTHER INFORMATION RELATED TO HERO
@@ -178,7 +177,7 @@ static void take_input_character(struct character_information)
 		{
 			character.hero_name = "Valkriye";
 			character.hero_class = "Warrior";
-			character.hero_health = 1584;
+			character.hero_health = 400;
 			character.hero_experience_level = 0;
 			character.hero_weapon = "Axe";
 			character.hero_damage = 0;
@@ -188,7 +187,7 @@ static void take_input_character(struct character_information)
 		{
 			character.hero_name = "Magic Archer";
 			character.hero_class = "Rogue";
-			character.hero_health = 1584;
+			character.hero_health = 400;
 			character.hero_experience_level = 0;
 			character.hero_weapon = "Bow And Magic Arrow";
 			character.hero_damage = 0;
@@ -198,7 +197,7 @@ static void take_input_character(struct character_information)
 		{
 			character.hero_name = "Prince";
 			character.hero_class = "Wage";
-			character.hero_health = 1584;
+			character.hero_health = 400;
 			character.hero_experience_level = 0;
 			character.hero_weapon = "Spiked Club";
 			character.hero_damage = 0;
@@ -765,7 +764,7 @@ void quest_1_function(struct quest_1_boss)
 	cout << endl;
 	display_character(character);
 	cout << endl;
-	cout << "Monster health = 2000\n";
+	cout << "Monster health = 600\n";
 	cout << "Monster Level = 5 ";
 	cout << endl;
 	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
@@ -777,8 +776,8 @@ void quest_1_function(struct quest_1_boss)
 		}
 		delayprint("\n\t\tThe Battle has started\n", 100);
 		cout << endl;
-		monster.health = 2000;
-		character.hero_health = 1584;
+		monster.health = 600;
+		character.hero_health = 400;
 		while (monster.health >= 1 && character.hero_health >= 1)
 		{
 			delayprint("Hero turn.... Press A to Attack OR B to go back to MAIN MENU :  ", 70);
@@ -835,11 +834,11 @@ void quest_1_function(struct quest_1_boss)
 		{
 
 			delayprint("\n\tYou killed The Monster with the final attack\n\tThe boss is defeated", 75);
-			character.hero_health = 2000;
+			character.hero_health = 600;
 			delayprint("\n\tYour Hero has been promoted to level 1. healthpoints and damage is increased, experience point reseted", 75);
 			character.level = 1;
 			cout << endl;
-			current_score = 1000 - monster.health;
+			current_score = 200 - monster.health;
 			if (current_score > high_score)
 			{
 				high_score = current_score;
@@ -852,8 +851,8 @@ void quest_1_function(struct quest_1_boss)
 		}
 		else if (character.hero_health < 50)
 		{
-			monster.health = 2000;
-			character.hero_health = 1584;
+			monster.health = 600;
+			character.hero_health = 400;
 			character.level = 0;
 			delayprint("\n\tYou Died....The Monster killed you.\n", 75);
 		}
@@ -891,10 +890,11 @@ void quest_2_function(struct quest_2_boss)
 {
 	string try_again_choice = "0";
 	string hero_attack_button;
+	int current_score;
 	cout << endl;
 	display_character(character);
 	cout << endl;
-	cout << "King Health = 2450\n";
+	cout << "King Health = 800\n";
 	cout << "King Level = 10 ";
 	cout << endl;
 	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
@@ -906,11 +906,11 @@ void quest_2_function(struct quest_2_boss)
 		}
 		delayprint("\n\t\tThe Battle has started\n", 100);
 		cout << endl;
-		king.health = 2450;
-		character.hero_health = 2000;
+		king.health = 800;
+		character.hero_health = 600;
 		while (king.health >= 1 && character.hero_health >= 1)
 		{
-			delayprint("Hero turn.... Press A to Attack :  ", 70);
+			delayprint("Hero turn.... Press A to Attack to B to Main Menu :  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
@@ -931,10 +931,17 @@ void quest_2_function(struct quest_2_boss)
 						cout << character.hero_damage;
 					}
 				}
+				if (hero_attack_button == "B" || hero_attack_button == "b")
+				{
+					system("cls");
+					main_menu();
+					break;
+				}
 				if (hero_attack_button != "A" && hero_attack_button != "a")
 				{
 					cout << "Invalid Attack Button, Press A to Attack : ";
 				}
+				
 			} while (hero_attack_button != "a" && hero_attack_button != "A");
 			king.health = king.health - character.hero_damage;
 			delayprint("\nMonster health = ", 70);
@@ -959,15 +966,25 @@ void quest_2_function(struct quest_2_boss)
 		{
 
 			delayprint("\n\tYou killed The King with the final attack\n\tThe boss is defeated", 75);
-			character.hero_health = 2000;
+			character.hero_health = 800;
 			delayprint("\n\tYour Hero has been promoted to level 2. healthpoints and damage is increased, experience point reseted", 75);
 			cout << endl;
 			character.level = 2;
+			current_score = 200 - king.health;
+			if (current_score > high_score)
+			{
+				high_score = current_score;
+				ofstream outFile("highscore.txt");
+				outFile << high_score;
+				outFile.close();
+				cout << "\nScore: " << high_score << endl;
+				savehighScore();
+			}
 		}
 		else if (character.hero_health < 50)
 		{
-			king.health = 2000;
-			character.hero_health = 1584;
+			king.health = 800;
+			character.hero_health = 600;
 			delayprint("\n\tYou Died....The King killed you.\n", 75);
 			character.level = 1;
 		}
@@ -1005,10 +1022,11 @@ void quest_3_function(struct quest_3_boss)
 {
 	string try_again_choice = "0";
 	string hero_attack_button;
+	int current_score;
 	cout << endl;
 	display_character(character);
 	cout << endl;
-	cout << "Gunsmith health = 2900\n";
+	cout << "Gunsmith health = 1000\n";
 	cout << "Gunsmith Level = 15 ";
 	cout << endl;
 	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
@@ -1020,11 +1038,11 @@ void quest_3_function(struct quest_3_boss)
 		}
 		delayprint("\n\t\tThe Battle has started\n", 100);
 		cout << endl;
-		gunsmith.health = 2900;
-		character.hero_health = 2450;
+		gunsmith.health = 1000;
+		character.hero_health = 800;
 		while (gunsmith.health >= 1 && character.hero_health >= 1)
 		{
-			delayprint("Hero turn.... Press A to Attack :  ", 70);
+			delayprint("Hero turn.... Press A to Attack OR B to Main Menu :  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
@@ -1044,21 +1062,27 @@ void quest_3_function(struct quest_3_boss)
 						cout << character.hero_damage;
 					}
 				}
+				if (hero_attack_button == "B" || hero_attack_button == "b")
+				{
+					system("cls");
+					main_menu();
+					break;
+				}
 				if (hero_attack_button != "A" && hero_attack_button != "a")
 				{
 					cout << "Invalid Attack Button, Press A to Attack : ";
 				}
 			} while (hero_attack_button != "A" && hero_attack_button != "A");
 			gunsmith.health = gunsmith.health - character.hero_damage;
-			delayprint("\nMonster health = ", 70);
+			delayprint("\nGunsmith health = ", 70);
 			cout << gunsmith.health;
 			cout << endl;
 			cout << endl;
 			if (gunsmith.health < 50)
 				break;
-			delayprint("Monster Turn...... Monster is attacking... ", 70);
+			delayprint("Gunsmith Turn...... Gunsmith is attacking... ", 70);
 			gunsmith.damage = 119 + (rand() % 210);
-			delayprint("Monster Damage : ", 70);
+			delayprint("Gunsmith Damage : ", 70);
 			cout << gunsmith.damage;
 			character.hero_health = character.hero_health - gunsmith.damage;
 			delayprint("\nHero Health = ", 70);
@@ -1072,15 +1096,25 @@ void quest_3_function(struct quest_3_boss)
 		{
 
 			delayprint("\n\tYou killed The Gunsmith with the final attack\n\tThe gunsmith is defeated", 75);
-			character.hero_health = 2900;
+			character.hero_health = 1000;
 			delayprint("\n\tYour Hero has been promoted to level 3. healthpoints and damage is increased, experience point reseted", 75);
 			cout << endl;
 			character.level = 3;
+			current_score = 200 - gunsmith.health;
+			if (current_score > high_score)
+			{
+				high_score = current_score;
+				ofstream outFile("highscore.txt");
+				outFile << high_score;
+				outFile.close();
+				cout << "\nScore: " << high_score << endl;
+				savehighScore();
+			}
 		}
 		else if (character.hero_health < 50)
 		{
-			gunsmith.health = 2900;
-			character.hero_health = 2450;
+			gunsmith.health = 1000;
+			character.hero_health = 800;
 			delayprint("\n\tYou Died....The Gunsmith killed you.\n", 75);
 			character.level = 2;
 		}
@@ -1118,10 +1152,11 @@ void quest_4_function(struct quest_4_boss)
 {
 	string try_again_choice = "0";
 	string hero_attack_button;
+	int current_score;
 	cout << endl;
 	display_character(character);
 	cout << endl;
-	cout << "Dragon health = 3350\n";
+	cout << "Dragon health = 1200\n";
 	cout << "Dragon Level = 20 ";
 	cout << endl;
 	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
@@ -1133,11 +1168,11 @@ void quest_4_function(struct quest_4_boss)
 		}
 		delayprint("\n\t\tThe Battle has started\n", 100);
 		cout << endl;
-		dragon.health = 3350;
-		character.hero_health = 2900;
+		dragon.health = 1200;
+		character.hero_health = 1000;
 		while (dragon.health >= 1 && character.hero_health >= 1)
 		{
-			delayprint("Hero turn.... Press A to Attack :  ", 70);
+			delayprint("Hero turn.... Press A to Attack or B to MAIN MENU :  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
@@ -1157,9 +1192,15 @@ void quest_4_function(struct quest_4_boss)
 						cout << character.hero_damage;
 					}
 				}
+				if (hero_attack_button == "B" || hero_attack_button == "b")
+				{
+					system("cls");
+					main_menu();
+					break;
+				}
 				if (hero_attack_button != "A" && hero_attack_button != "a")
 				{
-					cout << "Invalid Attack Button, Press A to Attack : ";
+					cout << "Invalid Attack Button, Press A to Attack to Main Menu : ";
 				}
 			} while (hero_attack_button != "a" && hero_attack_button != "A");
 			dragon.health = dragon.health - character.hero_damage;
@@ -1185,15 +1226,25 @@ void quest_4_function(struct quest_4_boss)
 		{
 
 			delayprint("\n\tYou killed The Dragon with the final attack\n\tThe dragon is defeated", 75);
-			character.hero_health = 3350;
+			character.hero_health = 1200;
 			delayprint("\n\tYour Hero has been promoted to level 4. healthpoints and damage is increased, experience point reseted", 75);
 			character.level = 4;
+			current_score = 200 - dragon.health;
+			if (current_score > high_score)
+			{
+				high_score = current_score;
+				ofstream outFile("highscore.txt");
+				outFile << high_score;
+				outFile.close();
+				cout << "\nScore: " << high_score << endl;
+				savehighScore();
+			}
 			cout << endl;
 		}
 		else if (character.hero_health < 50)
 		{
-			dragon.health = 3350;
-			character.hero_health = 2900;
+			dragon.health = 1200;
+			character.hero_health = 1000;
 			delayprint("\n\tYou Died....The Dragon Burned you.\n", 75);
 			character.level = 3;
 		}
@@ -1229,10 +1280,11 @@ void final_boss(struct final_boss)
 {
 	string try_again_choice = "0";
 	string hero_attack_button;
+	int current_score;
 	cout << endl;
 	display_character(character);
 	cout << endl;
-	cout << "The Witch health = 4000\n";
+	cout << "The Witch health = 1500\n";
 	cout << "The Witch Level = 27 ";
 	cout << endl;
 	srand((unsigned)time(NULL));       //This Boss Will be Easy as it is the first Quest
@@ -1244,11 +1296,11 @@ void final_boss(struct final_boss)
 		}
 		delayprint("\n\t\tThe Battle has started\n", 100);
 		cout << endl;
-		the_witch.health = 4000;
-		character.hero_health = 3350;
+		the_witch.health = 1500;
+		character.hero_health = 1200;
 		while (the_witch.health >= 1 && character.hero_health >= 1)
 		{
-			delayprint("Hero turn.... Press A to Attack :  ", 70);
+			delayprint("Hero turn.... Press A to Attack OR B to Main Menu:  ", 70);
 			do
 			{
 				cin >> hero_attack_button;
@@ -1268,6 +1320,12 @@ void final_boss(struct final_boss)
 						cout << character.hero_damage;
 					}
 				}
+				if (hero_attack_button == "B" || hero_attack_button == "b")
+				{
+					system("cls");
+					main_menu();
+					break;
+				}
 				if (hero_attack_button != "A" && hero_attack_button != "a")
 				{
 					cout << "Invalid Attack Button, Press A to Attack : ";
@@ -1280,9 +1338,9 @@ void final_boss(struct final_boss)
 			cout << endl;
 			if (the_witch.health < 50)
 				break;
-			delayprint("Monster Turn...... Monster is attacking... ", 70);
+			delayprint("Witch Turn...... Monster is attacking... ", 70);
 			the_witch.damage = 200 + (rand() % 290);
-			delayprint("Monster Damage : ", 70);
+			delayprint("Witch Damage : ", 70);
 			cout << the_witch.damage;
 			character.hero_health = character.hero_health - the_witch.damage;
 			delayprint("\nHero Health = ", 70);
@@ -1298,11 +1356,21 @@ void final_boss(struct final_boss)
 			delayprint("\n\tYou killed The Witch with the final attack\n\tThe boss is defeated", 75);
 			delayprint("\n\tYour Hero has completed the game", 75);
 			cout << endl;
+			current_score = 200 - the_witch.health;
+			if (current_score > high_score)
+			{
+				high_score = current_score;
+				ofstream outFile("highscore.txt");
+				outFile << high_score;
+				outFile.close();
+				cout << "\nScore: " << high_score << endl;
+				savehighScore();
+			}
 		}
 		else if (character.hero_health < 50)
 		{
-			the_witch.health = 4000;
-			character.hero_health = 3350;
+			the_witch.health = 1500;
+			character.hero_health = 1200;
 			delayprint("\n\tYou Died....The Witch made you a statue with her magic.\n", 75);
 		}
 		cout << "\nPress 1 to try again or 2 to go to quest selection menu or press 3 to main menu or press 4 to exit : ";
